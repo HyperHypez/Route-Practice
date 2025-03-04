@@ -13,6 +13,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       initialRoute: '/',
+      routes: {
+        '/two': (context) => const SecondPage(),
+        '/three': (context) => const ThirdPage(),
+
+      },
+
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -70,9 +76,13 @@ class _MyHomePageState extends State<MyHomePage> {
         // TRY THIS: Try changing the color here to a specific color (to
         // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
         // change color while the other colors stay the same.
-        flexibleSpace: Image(
-          image: AssetImage('images/csky.jpg'),
-          fit: BoxFit.cover,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('images/csky.jpg'),
+              fit: BoxFit.cover,
+            ),
+          ),
         ),
         backgroundColor: Colors.transparent,
 
@@ -107,7 +117,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Image(image: AssetImage('images/csky.jpg'))
                 )
             ),
-
+            Padding(padding: EdgeInsets.all(50.0)),
             Hero(
               tag: 'image',
               child: ElevatedButton(onPressed: (){
@@ -117,12 +127,74 @@ class _MyHomePageState extends State<MyHomePage> {
               )
             ),
 
-
-
           ],
         ),
       ),
 // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+class SecondPage extends StatelessWidget {
+  const SecondPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: GestureDetector(
+        onTap: () {
+          Navigator.pop(context);
+        },
+        child: Center(
+          child: Stack(
+            children: [
+              Positioned(
+                top: 120, // Adjust this value to move text down from the top
+                left: 0,
+                right: 0,
+                child: Text(
+                  'Second Page',
+                  style: TextStyle(
+                    color: Colors.deepOrange,
+                    fontSize: 34.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+
+              Positioned.fill(
+                child: Center(
+                  child: Hero(
+                    tag: 'image',
+                    child: Image.asset(
+                      'images/csky.jpg',
+                      fit: BoxFit.contain, // Ensures the image stays centered without pushing content
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+class ThirdPage extends StatelessWidget {
+  const ThirdPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Third Page'),
+      ),
+      body: Center(
+
+      ),
     );
   }
 }
