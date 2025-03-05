@@ -177,42 +177,32 @@ class SecondPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[850],
-      body: GestureDetector(
-        onTap: () {
-          Navigator.pop(context);
-        },
-        child: Center(
-          child: Stack(
-            children: [
-              Positioned(
-                top: 120, // Moves text down from the top
-                left: 0,
-                right: 0,
-                child: Text(
-                  'Second Page',
-                  style: TextStyle(
-                    color: Colors.deepOrange,
-                    fontSize: 34.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlign: TextAlign.center,
+      body: Center(
+        child: Column(
+          children: <Widget>[
+            const Padding(padding: EdgeInsets.all(35.0)),
+            Text('Welcome to the Chicago Skyline', style: TextStyle(fontSize: 24, color: Colors.orange[900])),
+            const Padding(padding: EdgeInsets.all(75.0)),
+            Hero(
+              tag: 'image',
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.transparent, // Removes white background
+                  shadowColor: Colors.transparent, // Removes shadow if needed
+                  padding: EdgeInsets.zero, // Removes extra padding
+                ),
+                child: Image.asset(
+                  'images/csky.jpg',
+                  fit: BoxFit.contain, // Ensures the image stays centered without pushing content
                 ),
               ),
-              Positioned.fill(
-                child: Center(
-                  child: Hero(
-                    tag: 'image1', // Must match the tag in the main page
-                    child: Image.asset(
-                      'images/csky.jpg',
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+            ),
+          ],
+        )
+      )
     );
   }
 }
