@@ -139,7 +139,7 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Padding(padding: EdgeInsets.all(20.0)),
             Hero(
-                tag: 'image',
+                tag: 'city sky',
                 child: ElevatedButton(onPressed: (){
                   Navigator.pushNamed(context, '/two');
                 },
@@ -154,7 +154,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Padding(padding: EdgeInsets.all(50.0)),
             Hero(
-              tag: 'image',
+              tag: 'teams',
               child: GestureDetector(onTap: (){
                 Navigator.pushNamed(context, '/three');
               },
@@ -184,7 +184,7 @@ class SecondPage extends StatelessWidget {
             Text('Welcome to the Chicago Skyline', style: TextStyle(fontSize: 24, color: Colors.orange[900])),
             const Padding(padding: EdgeInsets.all(75.0)),
             Hero(
-              tag: 'image',
+              tag: 'city sky',
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context);
@@ -218,14 +218,13 @@ class ThirdPage extends StatelessWidget {
         onTap: () {
           Navigator.pop(context);
         },
-
         child: Center(
           child: Stack(
             children: [
               Positioned.fill(
                 child: Center(
                   child: Hero(
-                    tag: 'image',
+                    tag: 'teams',
                     child: Image.asset(
                       'images/cteam.jpg',
                       fit: BoxFit.contain, // Ensures the image stays centered without pushing content
