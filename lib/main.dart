@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -38,7 +41,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Home Page'),
+      home: const MyHomePage(title: 'Home Page' ),
     );
   }
 }
@@ -76,6 +79,30 @@ class _MyHomePageState extends State<MyHomePage> {
         // TRY THIS: Try changing the color here to a specific color (to
         // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
         // change color while the other colors stay the same.
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(Icons.web, color: Colors.orange[900]),
+              onPressed: () {
+                launchUrl(Uri.parse('https://www.cs.uic.edu/'));
+              }
+          ),
+
+          IconButton(
+              icon: Icon(Icons.phone, color: Colors.orange[900]),
+              onPressed: (){
+                launchUrl(Uri.parse('tel:312-996-3422'));
+              }
+          ),
+
+
+          IconButton(
+              icon: Icon(Icons.email, color: Colors.orange[900]),
+              onPressed: (){
+                launchUrl(Uri.parse('mailto:hvu28@uic.edu'));
+              }
+          ),
+
+        ],
         flexibleSpace: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
@@ -88,8 +115,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: Text(widget.title, style: TextStyle(fontSize: 32, color: Colors.orange[900]),),
       ),
+      backgroundColor: Colors.grey[850],
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
@@ -107,23 +135,30 @@ class _MyHomePageState extends State<MyHomePage> {
           // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
           // action in the IDE, or press "p" in the console), to see the
           // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
+//mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Padding(padding: EdgeInsets.all(20.0)),
             Hero(
                 tag: 'image',
                 child: ElevatedButton(onPressed: (){
                   Navigator.pushNamed(context, '/two');
                 },
-                    child: Image(image: AssetImage('images/csky.jpg'))
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.transparent, // Removes white background
+                  shadowColor: Colors.transparent, // Removes shadow if needed
+                  padding: EdgeInsets.zero, // Removes extra padding
+                  elevation: 0, // Removes elevation if not needed
+                ),
+                    child: Image(image: AssetImage('images/csky.jpg'), fit: BoxFit.cover)
                 )
             ),
             Padding(padding: EdgeInsets.all(50.0)),
             Hero(
               tag: 'image',
-              child: ElevatedButton(onPressed: (){
+              child: GestureDetector(onTap: (){
                 Navigator.pushNamed(context, '/three');
               },
-                  child: Image(image: AssetImage('images/cteam.jpg'))
+                  child: Image(image: AssetImage('images/cteam.jpg'), fit: BoxFit.cover)
               )
             ),
 
@@ -141,6 +176,7 @@ class SecondPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[850],
       body: GestureDetector(
         onTap: () {
           Navigator.pop(context);
@@ -149,7 +185,7 @@ class SecondPage extends StatelessWidget {
           child: Stack(
             children: [
               Positioned(
-                top: 120, // Adjust this value to move text down from the top
+                top: 120, // Moves text down from the top
                 left: 0,
                 right: 0,
                 child: Text(
@@ -162,14 +198,13 @@ class SecondPage extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
               ),
-
               Positioned.fill(
                 child: Center(
                   child: Hero(
-                    tag: 'image',
+                    tag: 'image1', // Must match the tag in the main page
                     child: Image.asset(
                       'images/csky.jpg',
-                      fit: BoxFit.contain, // Ensures the image stays centered without pushing content
+                      fit: BoxFit.contain,
                     ),
                   ),
                 ),
@@ -182,19 +217,36 @@ class SecondPage extends StatelessWidget {
   }
 }
 
-
 class ThirdPage extends StatelessWidget {
   const ThirdPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Third Page'),
-      ),
-      body: Center(
+      backgroundColor: Colors.grey[850],
+      body: GestureDetector(
+        onTap: () {
+          Navigator.pop(context);
+        },
 
-      ),
+        child: Center(
+          child: Stack(
+            children: [
+              Positioned.fill(
+                child: Center(
+                  child: Hero(
+                    tag: 'image',
+                    child: Image.asset(
+                      'images/cteam.jpg',
+                      fit: BoxFit.contain, // Ensures the image stays centered without pushing content
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        )
+      )
     );
   }
 }
